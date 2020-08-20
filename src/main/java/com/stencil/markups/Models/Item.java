@@ -8,10 +8,11 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "item")
+@Table(name = "items")
 public class Item {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "item_index")
     private int item;
 
@@ -31,7 +32,7 @@ public class Item {
     private int area;
 
     @ManyToOne
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "room")
     private Room room;
 
     public Item(){}

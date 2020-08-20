@@ -10,9 +10,11 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
+@Table(name = "rooms")
 public class Room {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "room_index")
     private int room;
 
@@ -20,15 +22,11 @@ public class Room {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "House_id")
+    @JoinColumn(name = "House")
     private House house;
 
     @OneToMany(mappedBy = "room")
     private List<Item> items = new ArrayList<>();
-
-    public void addItem(Item item){
-        items.add(item);
-    }
 
     public Room(){}
 

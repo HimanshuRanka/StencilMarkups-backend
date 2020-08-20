@@ -15,7 +15,7 @@ public class User {
 
     @Id
     @Column(name = "userID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
 
     @OneToMany(mappedBy = "user")
