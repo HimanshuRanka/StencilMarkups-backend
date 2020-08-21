@@ -1,7 +1,9 @@
 package com.stencil.markups.Controllers;
 
+import com.stencil.markups.Exceptions.ResourceNotFoundException;
 import com.stencil.markups.Models.Item;
 import com.stencil.markups.Services.NewObjectService;
+import com.stencil.markups.Services.SetAccessService;
 import com.stencil.markups.Services.SpreadsheetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,17 +22,20 @@ public class SpreadsheetController {
     @Autowired
     private NewObjectService objects;
 
-    @GetMapping(value = "/populate")
-    public List<Item> populateSpreadsheet(){
-        return spreadsheet.getItems();
+    @Autowired
+    private SetAccessService lists;
+
+    @GetMapping(value = "/{room_id}/items")
+    public List<Item> populateSpreadsheet(@PathVariable int room_id) throws ResourceNotFoundException {
+        return lists.getItems(room_id);
     }
 
-    @PostMapping(value = "/addrow")
-    public ResponseEntity<String> newRow(){
+    @PostMapping(value = "/{room_id}/addrow")
+    public ResponseEntity<String> newRow(@PathVariable int room_id){
         try{
             //TODO: change the sent var to the room from the session env which i sti have to figure out how to set
             //It is potentially done in the frontend and then sent to the backend possibly using the request body
-            objects.addNewRow(1);
+            objects.addNewRow(room_id);
         }catch(Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

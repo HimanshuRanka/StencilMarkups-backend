@@ -3,7 +3,7 @@ package com.stencil.markups.Exceptions;
 public class ResourceNotFoundException extends Exception {
 
     public ResourceNotFoundException(){
-        super("The object with this id does not exist");
+        super("ERROR: The Resource you are trying to access cannot be found [or] does not exist.");
     }
 
     public ResourceNotFoundException(String message){

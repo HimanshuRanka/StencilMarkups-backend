@@ -1,5 +1,6 @@
 package com.stencil.markups.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,5 +33,15 @@ public @Data class House {
 
     public House(String name) {
         this.name = name;
+    }
+
+    @JsonIgnore
+    public User getUser() {
+        return user;
+    }
+
+    @JsonIgnore
+    public void setUser(User user) {
+        this.user = user;
     }
 }

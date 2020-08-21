@@ -25,22 +25,28 @@ public class NewObjectService implements NewObjectServiceIF {
 
     @Override
     public void addNewRow(int roomID) throws ResourceNotFoundException {
-        Item item = new Item();
-        itemRepository.save(item);
         Room room = roomRepository.findById(roomID)
                 .orElseThrow(ResourceNotFoundException::new);
+
+        Item item = new Item();
         item.setRoom(room);
         room.getItems().add(item);
+
+        itemRepository.save(item);
+        roomRepository.save(room);
     }
 
     @Override
     public void addNewRoom(int houseID) throws ResourceNotFoundException {
-        Room room = new Room();
-        roomRepository.save(room);
         House house = houseRepository.findById(houseID)
                 .orElseThrow(ResourceNotFoundException::new);
+
+        Room room = new Room();
         room.setHouse(house);
         house.getRooms().add(room);
+
+        roomRepository.save(room);
+        houseRepository.save(house);
     }
 
     @Override

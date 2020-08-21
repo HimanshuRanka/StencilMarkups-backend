@@ -1,5 +1,6 @@
 package com.stencil.markups.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -46,5 +47,15 @@ public class Item {
         this.width = width;
         this.height = height;
         this.nos = nos;
+    }
+
+    @JsonIgnore
+    public Room getRoom() {
+        return room;
+    }
+
+    @JsonIgnore
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }
